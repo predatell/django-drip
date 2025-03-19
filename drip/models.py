@@ -143,6 +143,10 @@ class QuerySetRule(models.Model):
         elif self.field_value.startswith('today+'):
             field_value = self.field_value.replace('today+', '')
             field_value = now().date() + timedelta_parse(field_value)
+        elif self.field_value.startswith('today|month'):
+            field_value = now().date().month
+        elif self.field_value.startswith('today|day'):
+            field_value = now().date().day
 
         # F expressions
         if self.field_value.startswith('F_'):
